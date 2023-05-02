@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import Chefs from '../Chefs/Chefs';
 
 const Home = () => {
     return (
         <div>
-            <h2>This is home comming soon</h2>
+
+            <Chefs></Chefs>
         </div>
     );
 };
