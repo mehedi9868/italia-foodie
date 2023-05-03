@@ -3,7 +3,6 @@
 import React from 'react';
 
 const ChefCard = ({ chef }) => {
-    console.log(chef);
     const { picture, name, yearsOfExperience, recipes } = chef
     return (
         <div className=' w-full bg-gray-50 drop-shadow-2xl hover:bg-gray-100 border hover:border-gray-200 rounded-lg p-6'>
