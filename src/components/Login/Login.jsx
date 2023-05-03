@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { FaGoogle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import { signInWithPopup } from 'firebase/auth';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const Login = () => {
     const handlePasswordChange = (event) => setPassword(event.target.value);
     const handleTerms = (event) => setTerms(event.target.checked);
 
-    const { login } = useContext(AuthContext);
+    const { login, googleLogIn, gitHubLogIn } = useContext(AuthContext);
     const handleFormSubmit = (event) => {
         event.preventDefault();
         login(email, password)
@@ -25,6 +26,26 @@ const Login = () => {
                 console.log(error);
             })
     };
+    // google login
+    const handleGoogleLogin = () => {
+        googleLogIn()
+            .then((result) => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+            }).catch((error) => {
+                console.log(error);
+            });
+    }
+    // github login
+    const handleGitHubLogin = () => {
+        gitHubLogIn()
+            .then((result) => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+            }).catch((error) => {
+                console.log(error);
+            });
+    }
 
     return (
 
@@ -93,6 +114,7 @@ const Login = () => {
                         <button
                             className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             type="button"
+                            onClick={handleGoogleLogin}
                         >
                             Sign in with Google
                         </button>
@@ -100,7 +122,9 @@ const Login = () => {
                         <span className="mx-2 text-gray-500">or</span>
                         <br />
 
-                        <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            onClick={handleGitHubLogin}
+                        >
                             Sign in with GitHub
                         </button>
 
