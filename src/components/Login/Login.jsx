@@ -9,6 +9,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [terms, setTerms] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -17,13 +19,22 @@ const Login = () => {
     const { login, googleLogIn, gitHubLogIn } = useContext(AuthContext);
     const handleFormSubmit = (event) => {
         event.preventDefault();
+        setErrorMessage('');
+        setSuccessMessage('');
         login(email, password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
+                setSuccessMessage('Successful login')
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.message);
+                if (error.message === 'Firebase: Error (auth/user-not-found).') {
+                    setErrorMessage('Email address or password does not match')
+                } else if (error.message === 'Firebase: Error (auth/wrong-password).') {
+                    setErrorMessage('Wrong password')
+                } else {
+                    setErrorMessage('Access to this account has been temporarily disabled due to many failed login attempts.')
+                }
             })
     };
     // google login
@@ -63,6 +74,7 @@ const Login = () => {
                             placeholder="Your email"
                             value={email}
                             onChange={handleEmailChange}
+                            required
                         />
                     </div>
                     <div className="mb-6">
@@ -76,6 +88,7 @@ const Login = () => {
                             placeholder="Your password"
                             value={password}
                             onChange={handlePasswordChange}
+                            required
                         />
                     </div>
                     <div className="mb-6">
@@ -85,6 +98,7 @@ const Login = () => {
                                 type="checkbox"
                                 checked={terms}
                                 onChange={handleTerms}
+                                required
                             />
                             <span className="text-sm">I agree to the terms and conditions</span>
                         </label>
@@ -108,6 +122,15 @@ const Login = () => {
                         >
                             Log In
                         </button>
+                        <div className='mb-2'>
+                            <p className='text-red-600'>
+                                <small>{errorMessage}</small>
+                            </p>
+                            <p className='text-green-600'>
+                                <small>{successMessage}</small>
+                            </p>
+                        </div>
+
                     </div>
                     <hr className="mb-6 border-t" />
                     <div className="text-center">
