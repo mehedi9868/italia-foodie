@@ -1,8 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-let user = false;
+import { AuthContext } from '../../providers/AuthProvider';
+
 const Header = () => {
+    const { user, logout } = useContext(AuthContext);
+    const handleSignOut = () => {
+        logout()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
     return (
         <nav>
             <div className="navbar bg-base-100">
@@ -28,7 +35,11 @@ const Header = () => {
                 </div>
                 <div className="navbar-end">
                     {user ?
-                        <img className="w-10 rounded-full" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" /> :
+                        <>
+                            <img className="w-10 rounded-full mr-5" src={user.photoURL} title={user.displayName} />
+                            <button className="btn" onClick={handleSignOut}>Sign Out</button>
+                        </>
+                        :
                         <Link to="/login" className="btn">Login</Link>
                     }
                 </div>

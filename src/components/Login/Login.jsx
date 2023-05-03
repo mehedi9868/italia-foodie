@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { FaGoogle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
-import { signInWithPopup } from 'firebase/auth';
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -12,11 +11,12 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
+    const { login, googleLogIn, gitHubLogIn } = useContext(AuthContext);
+
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
     const handleTerms = (event) => setTerms(event.target.checked);
 
-    const { login, googleLogIn, gitHubLogIn } = useContext(AuthContext);
     const handleFormSubmit = (event) => {
         event.preventDefault();
         setErrorMessage('');
