@@ -5,7 +5,7 @@ import Main from '../layouts/Main';
 import Home from '../components/Home/Home';
 import Register from '../components/Register/Register';
 import Login from '../components/Login/Login';
-import PrivateRoutes from './PrivateRoutes';
+import PrivateRoute from './PrivateRoute';
 import ChefRecipes from '../components/ChefRecipes/ChefRecipes';
 
 const router = createBrowserRouter([
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "chef-recipes/:id",
-                element: <PrivateRoutes><ChefRecipes></ChefRecipes></PrivateRoutes>,
+                element: <PrivateRoute><ChefRecipes></ChefRecipes></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://italia-foodie-server.vercel.app/${params.id}`)
             }
         ]
