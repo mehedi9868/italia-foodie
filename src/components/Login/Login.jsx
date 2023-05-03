@@ -7,7 +7,6 @@ import { AuthContext } from '../../providers/AuthProvider';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [terms, setTerms] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -15,7 +14,6 @@ const Login = () => {
 
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
-    const handleTerms = (event) => setTerms(event.target.checked);
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -25,6 +23,9 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 setSuccessMessage('Successful login')
+                // reset form
+                setEmail('');
+                setPassword('');
             })
             .catch(error => {
                 console.log(error.message);
@@ -90,18 +91,6 @@ const Login = () => {
                             onChange={handlePasswordChange}
                             required
                         />
-                    </div>
-                    <div className="mb-6">
-                        <label className="flex items-center">
-                            <input
-                                className="mr-2 leading-tight"
-                                type="checkbox"
-                                checked={terms}
-                                onChange={handleTerms}
-                                required
-                            />
-                            <span className="text-sm">I agree to the terms and conditions</span>
-                        </label>
                     </div>
                     <div className="mb-6">
                         <p className='mb-2'>

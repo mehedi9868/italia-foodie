@@ -9,6 +9,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirm, setConfirm] = useState('');
     const [photoUrl, setPhotoUrl] = useState('');
+    const [terms, setTerms] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -26,6 +27,13 @@ const Register = () => {
                 .then(result => {
                     const createdUser = result.user;
                     setSuccessMessage('User has been created')
+                    // reset form
+                    setName('');
+                    setEmail('');
+                    setPassword('');
+                    setConfirm('');
+                    setPhotoUrl('');
+                    setTerms(false);
                     console.log(createdUser);
                 })
                 .catch(error => {
@@ -106,6 +114,19 @@ const Register = () => {
                             onChange={(e) => setPhotoUrl(e.target.value)}
                             required
                         />
+                    </div>
+
+                    <div className="mb-6">
+                        <label className="flex items-center">
+                            <input
+                                className="mr-2 leading-tight"
+                                type="checkbox"
+                                checked={terms}
+                                onChange={(e) => setTerms(e.target.checked)}
+                                required
+                            />
+                            <span className="text-sm">I agree to the terms and conditions</span>
+                        </label>
                     </div>
 
                     <div className="mb-6">
