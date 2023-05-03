@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -9,9 +10,17 @@ const Register = () => {
     const [confirm, setConfirm] = useState('');
     const [photoUrl, setPhotoUrl] = useState('');
 
+    const { createUser } = useContext(AuthContext);
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(name, email, password, confirm, photoUrl);
+        createUser(email, password)
+            .then(result => {
+                const createdUser = result.user;
+                console.log(createdUser);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     };
 
     return (

@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGoogle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -12,9 +13,17 @@ const Login = () => {
     const handlePasswordChange = (event) => setPassword(event.target.value);
     const handleTerms = (event) => setTerms(event.target.checked);
 
+    const { login } = useContext(AuthContext);
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        console.log(`Email: ${email}, Password: ${password}, Terms: ${terms}`);
+        login(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     };
 
     return (
