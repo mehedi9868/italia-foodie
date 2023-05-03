@@ -12,12 +12,14 @@ const ChefRecipes = () => {
             <ChefBanner data={data}></ChefBanner>
             <div>
                 <h2 className='text-3xl font-bold py-10 text-center'>Recipes</h2>
-                {
-                    recipes.map((recipe, index) => <RecipeCard
-                        key={index}
-                        recipe={recipe}
-                    ></RecipeCard>)
-                }
+                <div className='grid grid-cols-2 gap-10 p-10 bg-orange-50'>
+                    {
+                        recipes.map((recipe, index) => <RecipeCard
+                            key={index}
+                            recipe={recipe}
+                        ></RecipeCard>)
+                    }
+                </div>
             </div>
         </div>
     );
