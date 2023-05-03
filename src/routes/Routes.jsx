@@ -8,6 +8,7 @@ import Login from '../components/Login/Login';
 import PrivateRoute from './PrivateRoute';
 import ChefRecipes from '../components/ChefRecipes/ChefRecipes';
 import Blogs from '../components/Blogs/Blogs';
+import ErrorPage from '../components/ErrorPage/ErrorPage';
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "*",
+        element: <ErrorPage></ErrorPage>
+    }
 ]);
 
 export default router;
