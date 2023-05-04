@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
@@ -13,6 +13,7 @@ const Register = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
+    const navigate = useNavigate();
     const { createUser } = useContext(AuthContext);
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,6 +36,7 @@ const Register = () => {
                     setPhotoUrl('');
                     setTerms(false);
                     console.log(createdUser);
+                    navigate('/login')
                 })
                 .catch(error => {
                     if (error.message == 'Firebase: Error (auth/email-already-in-use).') {
@@ -48,6 +50,7 @@ const Register = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-orange-50">
+            <h2 className='text-2xl font-bold mb-10'>Please Register</h2>
             <div className="w-full max-w-md">
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
