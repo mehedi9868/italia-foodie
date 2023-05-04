@@ -16,8 +16,8 @@ const TodaysRecipe = () => {
             <h2 className='text-2xl font-bold text-center mt-10'>Today's Recipe</h2>
             <p className='text-center italic mt-2 mb-10'><small>(Recipe of the day)</small></p>
 
-            <div className='flex bg-orange-50 mt-10'>
-                <img src={imageUrl} alt="" className='w-1/4' />
+            <div className='flex flex-col lg:flex-row bg-orange-50 mt-10'>
+                <img src={imageUrl} alt="" className='w-full lg:w-1/4' />
                 <div className='p-10'>
                     <p className='text-xl font-semibold mb-10'>{name}</p>
                     <p className='font-bold'>likes: {likes}</p>

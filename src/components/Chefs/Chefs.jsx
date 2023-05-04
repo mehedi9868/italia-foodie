@@ -12,7 +12,7 @@ const Chefs = () => {
     return (
         <div className='bg-orange-50'>
             <h2 className='text-2xl font-bold text-center py-10'>Chefs</h2>
-            <div className='w-3/4  grid grid-cols-3 gap-6 mx-auto pb-10'>
+            <div className='w-[90%] lg:w-3/4  grid lg:grid-cols-3 gap-6 mx-auto pb-10'>
                 {
                     chefsList.map(chef => <ChefCard
                         key={chef.id}

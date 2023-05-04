@@ -22,7 +22,7 @@ const Home = () => {
             <div className='pb-10'>
                 <h2 className='text-2xl font-bold text-center my-10'>What Customers Are Saying <br /> About Us</h2>
                 <p className='text-center mb-2'><small>We pride ourselves what our happy <br /> clients say</small></p>
-                <div className='grid grid-cols-3 gap-6 bg-orange-50'>
+                <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 bg-orange-50'>
 
                     {
                         testimonials.map((testimonial) => <Testimonial
