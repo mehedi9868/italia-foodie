@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Chefs from '../Chefs/Chefs';
 import HomeBanner from '../HomeBanner/HomeBanner';
 import Testimonial from '../Testimonial/Testimonial';
+import TodaysRecipe from '../TodaysRecipe/TodaysRecipe';
 
 const Home = () => {
     const [testimonials, setTestimonials] = useState([]);
@@ -16,6 +17,7 @@ const Home = () => {
         <div>
             <HomeBanner></HomeBanner>
             <Chefs></Chefs>
+            <TodaysRecipe></TodaysRecipe>
 
             <div className='pb-10'>
                 <h2 className='text-2xl font-bold text-center my-10'>What Customers Are Saying <br /> About Us</h2>
