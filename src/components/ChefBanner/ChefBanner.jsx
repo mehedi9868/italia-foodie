@@ -13,7 +13,7 @@ const ChefBanner = ({ data }) => {
             <div className=''>
                 <p className='text-2xl font-semibold mb-6'>Name: {name}</p>
                 <p className='text-xl mb-20'>{shortBio}</p>
-                <p className='font-bold'>Likes: 199</p>
+                <p className='font-bold'>Likes: {likes}</p>
                 <p className='font-bold'>Recipes: {recipes.length}</p>
                 <p className='font-bold'>Experiences: {yearsOfExperience} years.</p>
             </div>
