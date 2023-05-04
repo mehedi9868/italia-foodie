@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 
@@ -11,6 +11,10 @@ const Login = () => {
     const [successMessage, setSuccessMessage] = useState('');
 
     const { login, googleLogIn, gitHubLogIn } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -26,6 +30,7 @@ const Login = () => {
                 // reset form
                 setEmail('');
                 setPassword('');
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.log(error.message);
@@ -43,6 +48,7 @@ const Login = () => {
         googleLogIn()
             .then((result) => {
                 const loggedUser = result.user;
+                navigate(from, { replace: true });
                 console.log(loggedUser);
             }).catch((error) => {
                 console.log(error);
@@ -53,6 +59,7 @@ const Login = () => {
         gitHubLogIn()
             .then((result) => {
                 const loggedUser = result.user;
+                navigate(from, { replace: true });
                 console.log(loggedUser);
             }).catch((error) => {
                 console.log(error);
