@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -14,7 +15,7 @@ const Register = () => {
     const [successMessage, setSuccessMessage] = useState('');
 
     const navigate = useNavigate();
-    const { createUser } = useContext(AuthContext);
+    const { createUser, user } = useContext(AuthContext);
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessMessage('');
@@ -36,6 +37,7 @@ const Register = () => {
                     setPhotoUrl('');
                     setTerms(false);
                     console.log(createdUser);
+                    updateUserData(result.user, name, photoUrl)
                     navigate('/login')
                 })
                 .catch(error => {
@@ -47,6 +49,19 @@ const Register = () => {
         }
 
     };
+
+    const updateUserData = (user, name, photoUrl) => {
+        updateProfile(user, {
+            displayName: name,
+            photoURL: photoUrl
+        })
+            .then(() => {
+                console.log("updated");
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-orange-50">
