@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import LazyLoad from 'react-lazy-load';
 
 const ChefBanner = ({ data }) => {
     const { picture, name, shortBio
@@ -8,7 +9,9 @@ const ChefBanner = ({ data }) => {
     return (
         <div className='flex justify-center items-center gap-10 bg-orange-50'>
             < div className='w-1/3' >
-                <img src={picture} alt="" />
+                <LazyLoad>
+                    <img src={picture} alt="" />
+                </LazyLoad>
             </div >
             <div className=''>
                 <p className='text-2xl font-semibold mb-6'>Name: {name}</p>
