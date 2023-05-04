@@ -1,11 +1,24 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import jsPDF from 'jspdf';
 
 const Blogs = () => {
+    const downloadPdf = () => {
+        const doc = new jsPDF();
+        const blogsText = document.querySelector('#blogs').textContent;
+        doc.text(blogsText, 10, 10);
+        doc.save('blogs.pdf');
+    }
+
     return (
-        <div className='bg-orange-50'>
+        <div className='bg-orange-50' id='blogs'>
             <h1 className='text-2xl font-bold text-center pt-10'>Blogs</h1>
+            <div className='text-center mt-6'>
+                <button className='bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded' onClick={downloadPdf}>
+                    Download as PDF
+                </button>
+            </div>
             <div className='p-10'>
                 <h2 className='text-xl font-bold mb-4'>Differences between uncontrolled and controlled components?</h2>
                 <p className='text-justify'>In React, controlled and uncontrolled components refer to different ways of managing form inputs.
