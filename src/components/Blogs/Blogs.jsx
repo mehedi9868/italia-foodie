@@ -1,22 +1,27 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import jsPDF from 'jspdf';
+import { ArrowDownTrayIcon } from '@heroicons/react/24/solid';
+import html2pdf from 'html2pdf.js';
+
 
 const Blogs = () => {
-    const downloadPdf = () => {
-        const doc = new jsPDF();
-        const blogsText = document.querySelector('#blogs').textContent;
-        doc.text(blogsText, 10, 10);
-        doc.save('blogs.pdf');
-    }
+    const downloadAsPdf = () => {
+        const element = document.getElementById('blog');
+        const options = {
+            margin: 0.5,
+            filename: 'blog.pdf',
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+        };
+        html2pdf().set(options).from(element).save();
+    };
+
 
     return (
-        <div className='bg-orange-50' id='blogs'>
+        <div className='bg-orange-50' id='blog'>
             <h1 className='text-2xl font-bold text-center pt-10'>Blogs</h1>
             <div className='text-center mt-6'>
-                <button className='bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded' onClick={downloadPdf}>
-                    Download as PDF
+                <button className='btn' onClick={downloadAsPdf}>Download PDF<ArrowDownTrayIcon className='h-6 w-6 ml-3' />
                 </button>
             </div>
             <div className='p-10'>
